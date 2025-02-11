@@ -15,10 +15,11 @@ To compile the Dragon interpreter, run:
 
 ```sh
 gcc src/Dragon.c -o Dragon
-Usage
+```
+## Usage
 Create a .DragonC file to define your variables and commands. Here is an example:
 
-plaintext
+``` plaintext
 # Variable definitions
 COMPILER=gcc
 CFLAGS=-Wall -O2
