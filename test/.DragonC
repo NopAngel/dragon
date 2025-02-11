@@ -1,0 +1,8 @@
+# Definiciones de variables
+CLS=cls
+GXX=g++
+
+CLS
+
+build:
+    GXX ./index.cxx
