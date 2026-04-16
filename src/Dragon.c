@@ -1,17 +1,27 @@
+/*
+*
+*       dragon.c: main file
+*
+* license: MIT     |    @NopAngel
+*
+*
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Función para procesar un archivo .DragonC
-void process_dragonc(const char *filename);
+void process_dragonc
+ (const char *filename);
 
-// Función para ejecutar un comando
-void execute_command(const char *command);
+void execute_command
+ (const char *command);
 
-// Función para detectar el sistema operativo
-int is_windows();
+int is_windows
+ ();
 
-int my_setenv(const char *name, const char *value)
+int my_setenv
+ (const char *name, const char *value)
 {
     size_t needed = snprintf(NULL, 0, "%s=%s", name, value) + 1;
     char *env_var = malloc(needed);
@@ -21,7 +31,8 @@ int my_setenv(const char *name, const char *value)
     return putenv(env_var);
 }
 
-int main(int argc, char *argv[])
+int main
+ (int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -35,7 +46,8 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void process_dragonc(const char *filename)
+void process_dragonc
+ (const char *filename)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -47,16 +59,13 @@ void process_dragonc(const char *filename)
     char line[256];
     while (fgets(line, sizeof(line), file))
     {
-        // Remover el salto de línea
         line[strcspn(line, "\n")] = 0;
 
-        // Ignorar líneas vacías y comentarios
         if (line[0] == '\0' || line[0] == '#')
         {
             continue;
         }
 
-        // Si es una definición de variable
         char *equals = strchr(line, '=');
         if (equals != NULL)
         {
@@ -68,12 +77,12 @@ void process_dragonc(const char *filename)
         }
         else if (strchr(line, ':'))
         {
-            // Es una función
+            // is a function
             printf("Función detectada: %s\n", line);
         }
         else
         {
-            // Es un comando
+            // is a command
             execute_command(line);
         }
     }
@@ -81,12 +90,12 @@ void process_dragonc(const char *filename)
     fclose(file);
 }
 
-void execute_command(const char *command)
+void execute_command
+ (const char *command)
 {
     char expanded_command[256];
     strcpy(expanded_command, command);
 
-    // Expandir variables
     char *dollar = strchr(expanded_command, '$');
     while (dollar != NULL)
     {
@@ -118,7 +127,8 @@ void execute_command(const char *command)
     printf("Ejecutado: %s\n", expanded_command);
 }
 
-int is_windows()
+int is_windows
+ ()
 {
 #ifdef _WIN32
     return 1;
